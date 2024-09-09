@@ -1,0 +1,225 @@
+WITH unpivoted AS
+(    
+    SELECT INSERTDATE, COMPANY, NETWORKS, PRODUCTS, columnheads, allvalues
+    FROM sampledb.testuser.tblPivotPurpose
+    UNPIVOT INCLUDE NULLS (allvalues for columnheads IN
+        (
+            numerator_DAILY_KPI_1,	numerator_MTD_KPI_1,	numerator_LMTD_KPI_1,	numerator_LAST_MTH_KPI_1,	numerator_YTD_KPI_1,	numerator_LYTD_KPI_1,	numerator_LAST_YR_KPI_1,
+            denominator_DAILY_KPI_1,	denominator_MTD_KPI_1,	denominator_LMTD_KPI_1,	denominator_LAST_MTH_KPI_1,	denominator_YTD_KPI_1,	denominator_LYTD_KPI_1,	denominator_LAST_YR_KPI_1,
+            numerator_DAILY_KPI_2,	numerator_MTD_KPI_2,	numerator_LMTD_KPI_2,	numerator_LAST_MTH_KPI_2,	numerator_YTD_KPI_2,	numerator_LYTD_KPI_2,	numerator_LAST_YR_KPI_2,
+            denominator_DAILY_KPI_2,	denominator_MTD_KPI_2,	denominator_LMTD_KPI_2,	denominator_LAST_MTH_KPI_2,	denominator_YTD_KPI_2,	denominator_LYTD_KPI_2,	denominator_LAST_YR_KPI_2,
+            numerator_DAILY_KPI_3,	numerator_MTD_KPI_3,	numerator_LMTD_KPI_3,	numerator_LAST_MTH_KPI_3,	numerator_YTD_KPI_3,	numerator_LYTD_KPI_3,	numerator_LAST_YR_KPI_3,
+            denominator_DAILY_KPI_3,	denominator_MTD_KPI_3,	denominator_LMTD_KPI_3,	denominator_LAST_MTH_KPI_3,	denominator_YTD_KPI_3,	denominator_LYTD_KPI_3,	denominator_LAST_YR_KPI_3,
+            numerator_DAILY_KPI_4,	numerator_MTD_KPI_4,	numerator_LMTD_KPI_4,	numerator_LAST_MTH_KPI_4,	numerator_YTD_KPI_4,	numerator_LYTD_KPI_4,	numerator_LAST_YR_KPI_4,
+            denominator_DAILY_KPI_4,	denominator_MTD_KPI_4,	denominator_LMTD_KPI_4,	denominator_LAST_MTH_KPI_4,	denominator_YTD_KPI_4,	denominator_LYTD_KPI_4,	denominator_LAST_YR_KPI_4,
+            numerator_DAILY_KPI_5,	numerator_MTD_KPI_5,	numerator_LMTD_KPI_5,	numerator_LAST_MTH_KPI_5,	numerator_YTD_KPI_5,	numerator_LYTD_KPI_5,	numerator_LAST_YR_KPI_5,
+            denominator_DAILY_KPI_5,	denominator_MTD_KPI_5,	denominator_LMTD_KPI_5,	denominator_LAST_MTH_KPI_5,	denominator_YTD_KPI_5,	denominator_LYTD_KPI_5,	denominator_LAST_YR_KPI_5,
+            numerator_DAILY_KPI_6,	numerator_MTD_KPI_6,	numerator_LMTD_KPI_6,	numerator_LAST_MTH_KPI_6,	numerator_YTD_KPI_6,	numerator_LYTD_KPI_6,	numerator_LAST_YR_KPI_6,
+            denominator_DAILY_KPI_6,	denominator_MTD_KPI_6,	denominator_LMTD_KPI_6,	denominator_LAST_MTH_KPI_6,	denominator_YTD_KPI_6,	denominator_LYTD_KPI_6,	denominator_LAST_YR_KPI_6,
+            numerator_DAILY_KPI_7,	numerator_MTD_KPI_7,	numerator_LMTD_KPI_7,	numerator_LAST_MTH_KPI_7,	numerator_YTD_KPI_7,	numerator_LYTD_KPI_7,	numerator_LAST_YR_KPI_7,
+            denominator_DAILY_KPI_7,	denominator_MTD_KPI_7,	denominator_LMTD_KPI_7,	denominator_LAST_MTH_KPI_7,	denominator_YTD_KPI_7,	denominator_LYTD_KPI_7,	denominator_LAST_YR_KPI_7,
+            numerator_DAILY_KPI_8,	numerator_MTD_KPI_8,	numerator_LMTD_KPI_8,	numerator_LAST_MTH_KPI_8,	numerator_YTD_KPI_8,	numerator_LYTD_KPI_8,	numerator_LAST_YR_KPI_8,
+            denominator_DAILY_KPI_8,	denominator_MTD_KPI_8,	denominator_LMTD_KPI_8,	denominator_LAST_MTH_KPI_8,	denominator_YTD_KPI_8,	denominator_LYTD_KPI_8,	denominator_LAST_YR_KPI_8,
+            numerator_DAILY_KPI_9,	numerator_MTD_KPI_9,	numerator_LMTD_KPI_9,	numerator_LAST_MTH_KPI_9,	numerator_YTD_KPI_9,	numerator_LYTD_KPI_9,	numerator_LAST_YR_KPI_9,
+            denominator_DAILY_KPI_9,	denominator_MTD_KPI_9,	denominator_LMTD_KPI_9,	denominator_LAST_MTH_KPI_9,	denominator_YTD_KPI_9,	denominator_LYTD_KPI_9,	denominator_LAST_YR_KPI_9,
+            numerator_DAILY_KPI_10,	numerator_MTD_KPI_10,	numerator_LMTD_KPI_10,	numerator_LAST_MTH_KPI_10,	numerator_YTD_KPI_10,	numerator_LYTD_KPI_10,	numerator_LAST_YR_KPI_10,
+            denominator_DAILY_KPI_10,	denominator_MTD_KPI_10,	denominator_LMTD_KPI_10,	denominator_LAST_MTH_KPI_10,	denominator_YTD_KPI_10,	denominator_LYTD_KPI_10,	denominator_LAST_YR_KPI_10,
+            numerator_DAILY_KPI_11,	numerator_MTD_KPI_11,	numerator_LMTD_KPI_11,	numerator_LAST_MTH_KPI_11,	numerator_YTD_KPI_11,	numerator_LYTD_KPI_11,	numerator_LAST_YR_KPI_11,
+            denominator_DAILY_KPI_11,	denominator_MTD_KPI_11,	denominator_LMTD_KPI_11,	denominator_LAST_MTH_KPI_11,	denominator_YTD_KPI_11,	denominator_LYTD_KPI_11,	denominator_LAST_YR_KPI_11,
+            numerator_DAILY_KPI_12,	numerator_MTD_KPI_12,	numerator_LMTD_KPI_12,	numerator_LAST_MTH_KPI_12,	numerator_YTD_KPI_12,	numerator_LYTD_KPI_12,	numerator_LAST_YR_KPI_12,
+            denominator_DAILY_KPI_12,	denominator_MTD_KPI_12,	denominator_LMTD_KPI_12,	denominator_LAST_MTH_KPI_12,	denominator_YTD_KPI_12,	denominator_LYTD_KPI_12,	denominator_LAST_YR_KPI_12,
+            numerator_DAILY_KPI_13,	numerator_MTD_KPI_13,	numerator_LMTD_KPI_13,	numerator_LAST_MTH_KPI_13,	numerator_YTD_KPI_13,	numerator_LYTD_KPI_13,	numerator_LAST_YR_KPI_13,
+            denominator_DAILY_KPI_13,	denominator_MTD_KPI_13,	denominator_LMTD_KPI_13,	denominator_LAST_MTH_KPI_13,	denominator_YTD_KPI_13,	denominator_LYTD_KPI_13,	denominator_LAST_YR_KPI_13,
+            numerator_DAILY_KPI_14,	numerator_MTD_KPI_14,	numerator_LMTD_KPI_14,	numerator_LAST_MTH_KPI_14,	numerator_YTD_KPI_14,	numerator_LYTD_KPI_14,	numerator_LAST_YR_KPI_14,
+            denominator_DAILY_KPI_14,	denominator_MTD_KPI_14,	denominator_LMTD_KPI_14,	denominator_LAST_MTH_KPI_14,	denominator_YTD_KPI_14,	denominator_LYTD_KPI_14,	denominator_LAST_YR_KPI_14,
+            numerator_DAILY_KPI_15,	numerator_MTD_KPI_15,	numerator_LMTD_KPI_15,	numerator_LAST_MTH_KPI_15,	numerator_YTD_KPI_15,	numerator_LYTD_KPI_15,	numerator_LAST_YR_KPI_15,
+            denominator_DAILY_KPI_15,	denominator_MTD_KPI_15,	denominator_LMTD_KPI_15,	denominator_LAST_MTH_KPI_15,	denominator_YTD_KPI_15,	denominator_LYTD_KPI_15,	denominator_LAST_YR_KPI_15,
+            numerator_DAILY_KPI_16,	numerator_MTD_KPI_16,	numerator_LMTD_KPI_16,	numerator_LAST_MTH_KPI_16,	numerator_YTD_KPI_16,	numerator_LYTD_KPI_16,	numerator_LAST_YR_KPI_16,
+            denominator_DAILY_KPI_16,	denominator_MTD_KPI_16,	denominator_LMTD_KPI_16,	denominator_LAST_MTH_KPI_16,	denominator_YTD_KPI_16,	denominator_LYTD_KPI_16,	denominator_LAST_YR_KPI_16,
+            numerator_DAILY_KPI_17,	numerator_MTD_KPI_17,	numerator_LMTD_KPI_17,	numerator_LAST_MTH_KPI_17,	numerator_YTD_KPI_17,	numerator_LYTD_KPI_17,	numerator_LAST_YR_KPI_17,
+            denominator_DAILY_KPI_17,	denominator_MTD_KPI_17,	denominator_LMTD_KPI_17,	denominator_LAST_MTH_KPI_17,	denominator_YTD_KPI_17,	denominator_LYTD_KPI_17,	denominator_LAST_YR_KPI_17,
+            numerator_DAILY_KPI_18,	numerator_MTD_KPI_18,	numerator_LMTD_KPI_18,	numerator_LAST_MTH_KPI_18,	numerator_YTD_KPI_18,	numerator_LYTD_KPI_18,	numerator_LAST_YR_KPI_18,
+            denominator_DAILY_KPI_18,	denominator_MTD_KPI_18,	denominator_LMTD_KPI_18,	denominator_LAST_MTH_KPI_18,	denominator_YTD_KPI_18,	denominator_LYTD_KPI_18,	denominator_LAST_YR_KPI_18,
+            numerator_DAILY_KPI_19,	numerator_MTD_KPI_19,	numerator_LMTD_KPI_19,	numerator_LAST_MTH_KPI_19,	numerator_YTD_KPI_19,	numerator_LYTD_KPI_19,	numerator_LAST_YR_KPI_19,
+            denominator_DAILY_KPI_19,	denominator_MTD_KPI_19,	denominator_LMTD_KPI_19,	denominator_LAST_MTH_KPI_19,	denominator_YTD_KPI_19,	denominator_LYTD_KPI_19,	denominator_LAST_YR_KPI_19,
+            numerator_DAILY_KPI_20,	numerator_MTD_KPI_20,	numerator_LMTD_KPI_20,	numerator_LAST_MTH_KPI_20,	numerator_YTD_KPI_20,	numerator_LYTD_KPI_20,	numerator_LAST_YR_KPI_20,
+            denominator_DAILY_KPI_20,	denominator_MTD_KPI_20,	denominator_LMTD_KPI_20,	denominator_LAST_MTH_KPI_20,	denominator_YTD_KPI_20,	denominator_LYTD_KPI_20,	denominator_LAST_YR_KPI_20,
+            numerator_DAILY_KPI_21,	numerator_MTD_KPI_21,	numerator_LMTD_KPI_21,	numerator_LAST_MTH_KPI_21,	numerator_YTD_KPI_21,	numerator_LYTD_KPI_21,	numerator_LAST_YR_KPI_21,
+            denominator_DAILY_KPI_21,	denominator_MTD_KPI_21,	denominator_LMTD_KPI_21,	denominator_LAST_MTH_KPI_21,	denominator_YTD_KPI_21,	denominator_LYTD_KPI_21,	denominator_LAST_YR_KPI_21,
+            numerator_DAILY_KPI_22,	numerator_MTD_KPI_22,	numerator_LMTD_KPI_22,	numerator_LAST_MTH_KPI_22,	numerator_YTD_KPI_22,	numerator_LYTD_KPI_22,	numerator_LAST_YR_KPI_22,
+            denominator_DAILY_KPI_22,	denominator_MTD_KPI_22,	denominator_LMTD_KPI_22,	denominator_LAST_MTH_KPI_22,	denominator_YTD_KPI_22,	denominator_LYTD_KPI_22,	denominator_LAST_YR_KPI_22,
+            numerator_DAILY_KPI_23,	numerator_MTD_KPI_23,	numerator_LMTD_KPI_23,	numerator_LAST_MTH_KPI_23,	numerator_YTD_KPI_23,	numerator_LYTD_KPI_23,	numerator_LAST_YR_KPI_23,
+            denominator_DAILY_KPI_23,	denominator_MTD_KPI_23,	denominator_LMTD_KPI_23,	denominator_LAST_MTH_KPI_23,	denominator_YTD_KPI_23,	denominator_LYTD_KPI_23,	denominator_LAST_YR_KPI_23,
+            numerator_DAILY_KPI_24,	numerator_MTD_KPI_24,	numerator_LMTD_KPI_24,	numerator_LAST_MTH_KPI_24,	numerator_YTD_KPI_24,	numerator_LYTD_KPI_24,	numerator_LAST_YR_KPI_24,
+            denominator_DAILY_KPI_24,	denominator_MTD_KPI_24,	denominator_LMTD_KPI_24,	denominator_LAST_MTH_KPI_24,	denominator_YTD_KPI_24,	denominator_LYTD_KPI_24,	denominator_LAST_YR_KPI_24,
+            numerator_DAILY_KPI_25,	numerator_MTD_KPI_25,	numerator_LMTD_KPI_25,	numerator_LAST_MTH_KPI_25,	numerator_YTD_KPI_25,	numerator_LYTD_KPI_25,	numerator_LAST_YR_KPI_25,
+            denominator_DAILY_KPI_25,	denominator_MTD_KPI_25,	denominator_LMTD_KPI_25,	denominator_LAST_MTH_KPI_25,	denominator_YTD_KPI_25,	denominator_LYTD_KPI_25,	denominator_LAST_YR_KPI_25,
+            numerator_DAILY_KPI_26,	numerator_MTD_KPI_26,	numerator_LMTD_KPI_26,	numerator_LAST_MTH_KPI_26,	numerator_YTD_KPI_26,	numerator_LYTD_KPI_26,	numerator_LAST_YR_KPI_26,
+            denominator_DAILY_KPI_26,	denominator_MTD_KPI_26,	denominator_LMTD_KPI_26,	denominator_LAST_MTH_KPI_26,	denominator_YTD_KPI_26,	denominator_LYTD_KPI_26,	denominator_LAST_YR_KPI_26,
+            numerator_DAILY_KPI_27,	numerator_MTD_KPI_27,	numerator_LMTD_KPI_27,	numerator_LAST_MTH_KPI_27,	numerator_YTD_KPI_27,	numerator_LYTD_KPI_27,	numerator_LAST_YR_KPI_27,
+            denominator_DAILY_KPI_27,	denominator_MTD_KPI_27,	denominator_LMTD_KPI_27,	denominator_LAST_MTH_KPI_27,	denominator_YTD_KPI_27,	denominator_LYTD_KPI_27,	denominator_LAST_YR_KPI_27,
+            numerator_DAILY_KPI_28,	numerator_MTD_KPI_28,	numerator_LMTD_KPI_28,	numerator_LAST_MTH_KPI_28,	numerator_YTD_KPI_28,	numerator_LYTD_KPI_28,	numerator_LAST_YR_KPI_28,
+            denominator_DAILY_KPI_28,	denominator_MTD_KPI_28,	denominator_LMTD_KPI_28,	denominator_LAST_MTH_KPI_28,	denominator_YTD_KPI_28,	denominator_LYTD_KPI_28,	denominator_LAST_YR_KPI_28,
+            numerator_DAILY_KPI_29,	numerator_MTD_KPI_29,	numerator_LMTD_KPI_29,	numerator_LAST_MTH_KPI_29,	numerator_YTD_KPI_29,	numerator_LYTD_KPI_29,	numerator_LAST_YR_KPI_29,
+            denominator_DAILY_KPI_29,	denominator_MTD_KPI_29,	denominator_LMTD_KPI_29,	denominator_LAST_MTH_KPI_29,	denominator_YTD_KPI_29,	denominator_LYTD_KPI_29,	denominator_LAST_YR_KPI_29,
+            numerator_DAILY_KPI_30,	numerator_MTD_KPI_30,	numerator_LMTD_KPI_30,	numerator_LAST_MTH_KPI_30,	numerator_YTD_KPI_30,	numerator_LYTD_KPI_30,	numerator_LAST_YR_KPI_30,
+            denominator_DAILY_KPI_30,	denominator_MTD_KPI_30,	denominator_LMTD_KPI_30,	denominator_LAST_MTH_KPI_30,	denominator_YTD_KPI_30,	denominator_LYTD_KPI_30,	denominator_LAST_YR_KPI_30,
+            numerator_DAILY_KPI_31,	numerator_MTD_KPI_31,	numerator_LMTD_KPI_31,	numerator_LAST_MTH_KPI_31,	numerator_YTD_KPI_31,	numerator_LYTD_KPI_31,	numerator_LAST_YR_KPI_31,
+            denominator_DAILY_KPI_31,	denominator_MTD_KPI_31,	denominator_LMTD_KPI_31,	denominator_LAST_MTH_KPI_31,	denominator_YTD_KPI_31,	denominator_LYTD_KPI_31,	denominator_LAST_YR_KPI_31,
+            numerator_DAILY_KPI_32,	numerator_MTD_KPI_32,	numerator_LMTD_KPI_32,	numerator_LAST_MTH_KPI_32,	numerator_YTD_KPI_32,	numerator_LYTD_KPI_32,	numerator_LAST_YR_KPI_32,
+            denominator_DAILY_KPI_32,	denominator_MTD_KPI_32,	denominator_LMTD_KPI_32,	denominator_LAST_MTH_KPI_32,	denominator_YTD_KPI_32,	denominator_LYTD_KPI_32,	denominator_LAST_YR_KPI_32,
+            numerator_DAILY_KPI_33,	numerator_MTD_KPI_33,	numerator_LMTD_KPI_33,	numerator_LAST_MTH_KPI_33,	numerator_YTD_KPI_33,	numerator_LYTD_KPI_33,	numerator_LAST_YR_KPI_33,
+            denominator_DAILY_KPI_33,	denominator_MTD_KPI_33,	denominator_LMTD_KPI_33,	denominator_LAST_MTH_KPI_33,	denominator_YTD_KPI_33,	denominator_LYTD_KPI_33,	denominator_LAST_YR_KPI_33,
+            numerator_DAILY_KPI_34,	numerator_MTD_KPI_34,	numerator_LMTD_KPI_34,	numerator_LAST_MTH_KPI_34,	numerator_YTD_KPI_34,	numerator_LYTD_KPI_34,	numerator_LAST_YR_KPI_34,
+            denominator_DAILY_KPI_34,	denominator_MTD_KPI_34,	denominator_LMTD_KPI_34,	denominator_LAST_MTH_KPI_34,	denominator_YTD_KPI_34,	denominator_LYTD_KPI_34,	denominator_LAST_YR_KPI_34,
+            numerator_DAILY_KPI_35,	numerator_MTD_KPI_35,	numerator_LMTD_KPI_35,	numerator_LAST_MTH_KPI_35,	numerator_YTD_KPI_35,	numerator_LYTD_KPI_35,	numerator_LAST_YR_KPI_35,
+            denominator_DAILY_KPI_35,	denominator_MTD_KPI_35,	denominator_LMTD_KPI_35,	denominator_LAST_MTH_KPI_35,	denominator_YTD_KPI_35,	denominator_LYTD_KPI_35,	denominator_LAST_YR_KPI_35,
+            numerator_DAILY_KPI_36,	numerator_MTD_KPI_36,	numerator_LMTD_KPI_36,	numerator_LAST_MTH_KPI_36,	numerator_YTD_KPI_36,	numerator_LYTD_KPI_36,	numerator_LAST_YR_KPI_36,
+            denominator_DAILY_KPI_36,	denominator_MTD_KPI_36,	denominator_LMTD_KPI_36,	denominator_LAST_MTH_KPI_36,	denominator_YTD_KPI_36,	denominator_LYTD_KPI_36,	denominator_LAST_YR_KPI_36,
+            numerator_DAILY_KPI_37,	numerator_MTD_KPI_37,	numerator_LMTD_KPI_37,	numerator_LAST_MTH_KPI_37,	numerator_YTD_KPI_37,	numerator_LYTD_KPI_37,	numerator_LAST_YR_KPI_37,
+            denominator_DAILY_KPI_37,	denominator_MTD_KPI_37,	denominator_LMTD_KPI_37,	denominator_LAST_MTH_KPI_37,	denominator_YTD_KPI_37,	denominator_LYTD_KPI_37,	denominator_LAST_YR_KPI_37,
+            numerator_DAILY_KPI_38,	numerator_MTD_KPI_38,	numerator_LMTD_KPI_38,	numerator_LAST_MTH_KPI_38,	numerator_YTD_KPI_38,	numerator_LYTD_KPI_38,	numerator_LAST_YR_KPI_38,
+            denominator_DAILY_KPI_38,	denominator_MTD_KPI_38,	denominator_LMTD_KPI_38,	denominator_LAST_MTH_KPI_38,	denominator_YTD_KPI_38,	denominator_LYTD_KPI_38,	denominator_LAST_YR_KPI_38,
+            numerator_DAILY_KPI_39,	numerator_MTD_KPI_39,	numerator_LMTD_KPI_39,	numerator_LAST_MTH_KPI_39,	numerator_YTD_KPI_39,	numerator_LYTD_KPI_39,	numerator_LAST_YR_KPI_39,
+            denominator_DAILY_KPI_39,	denominator_MTD_KPI_39,	denominator_LMTD_KPI_39,	denominator_LAST_MTH_KPI_39,	denominator_YTD_KPI_39,	denominator_LYTD_KPI_39,	denominator_LAST_YR_KPI_39,
+            numerator_DAILY_KPI_40,	numerator_MTD_KPI_40,	numerator_LMTD_KPI_40,	numerator_LAST_MTH_KPI_40,	numerator_YTD_KPI_40,	numerator_LYTD_KPI_40,	numerator_LAST_YR_KPI_40,
+            denominator_DAILY_KPI_40,	denominator_MTD_KPI_40,	denominator_LMTD_KPI_40,	denominator_LAST_MTH_KPI_40,	denominator_YTD_KPI_40,	denominator_LYTD_KPI_40,	denominator_LAST_YR_KPI_40,
+            numerator_DAILY_KPI_41,	numerator_MTD_KPI_41,	numerator_LMTD_KPI_41,	numerator_LAST_MTH_KPI_41,	numerator_YTD_KPI_41,	numerator_LYTD_KPI_41,	numerator_LAST_YR_KPI_41,
+            denominator_DAILY_KPI_41,	denominator_MTD_KPI_41,	denominator_LMTD_KPI_41,	denominator_LAST_MTH_KPI_41,	denominator_YTD_KPI_41,	denominator_LYTD_KPI_41,	denominator_LAST_YR_KPI_41,
+            numerator_DAILY_KPI_42,	numerator_MTD_KPI_42,	numerator_LMTD_KPI_42,	numerator_LAST_MTH_KPI_42,	numerator_YTD_KPI_42,	numerator_LYTD_KPI_42,	numerator_LAST_YR_KPI_42,
+            denominator_DAILY_KPI_42,	denominator_MTD_KPI_42,	denominator_LMTD_KPI_42,	denominator_LAST_MTH_KPI_42,	denominator_YTD_KPI_42,	denominator_LYTD_KPI_42,	denominator_LAST_YR_KPI_42,
+            numerator_DAILY_KPI_43,	numerator_MTD_KPI_43,	numerator_LMTD_KPI_43,	numerator_LAST_MTH_KPI_43,	numerator_YTD_KPI_43,	numerator_LYTD_KPI_43,	numerator_LAST_YR_KPI_43,
+            denominator_DAILY_KPI_43,	denominator_MTD_KPI_43,	denominator_LMTD_KPI_43,	denominator_LAST_MTH_KPI_43,	denominator_YTD_KPI_43,	denominator_LYTD_KPI_43,	denominator_LAST_YR_KPI_43,
+            numerator_DAILY_KPI_44,	numerator_MTD_KPI_44,	numerator_LMTD_KPI_44,	numerator_LAST_MTH_KPI_44,	numerator_YTD_KPI_44,	numerator_LYTD_KPI_44,	numerator_LAST_YR_KPI_44,
+            denominator_DAILY_KPI_44,	denominator_MTD_KPI_44,	denominator_LMTD_KPI_44,	denominator_LAST_MTH_KPI_44,	denominator_YTD_KPI_44,	denominator_LYTD_KPI_44,	denominator_LAST_YR_KPI_44,
+            numerator_DAILY_KPI_45,	numerator_MTD_KPI_45,	numerator_LMTD_KPI_45,	numerator_LAST_MTH_KPI_45,	numerator_YTD_KPI_45,	numerator_LYTD_KPI_45,	numerator_LAST_YR_KPI_45,
+            denominator_DAILY_KPI_45,	denominator_MTD_KPI_45,	denominator_LMTD_KPI_45,	denominator_LAST_MTH_KPI_45,	denominator_YTD_KPI_45,	denominator_LYTD_KPI_45,	denominator_LAST_YR_KPI_45,
+            numerator_DAILY_KPI_46,	numerator_MTD_KPI_46,	numerator_LMTD_KPI_46,	numerator_LAST_MTH_KPI_46,	numerator_YTD_KPI_46,	numerator_LYTD_KPI_46,	numerator_LAST_YR_KPI_46,
+            denominator_DAILY_KPI_46,	denominator_MTD_KPI_46,	denominator_LMTD_KPI_46,	denominator_LAST_MTH_KPI_46,	denominator_YTD_KPI_46,	denominator_LYTD_KPI_46,	denominator_LAST_YR_KPI_46,
+            numerator_DAILY_KPI_47,	numerator_MTD_KPI_47,	numerator_LMTD_KPI_47,	numerator_LAST_MTH_KPI_47,	numerator_YTD_KPI_47,	numerator_LYTD_KPI_47,	numerator_LAST_YR_KPI_47,
+            denominator_DAILY_KPI_47,	denominator_MTD_KPI_47,	denominator_LMTD_KPI_47,	denominator_LAST_MTH_KPI_47,	denominator_YTD_KPI_47,	denominator_LYTD_KPI_47,	denominator_LAST_YR_KPI_47,
+            numerator_DAILY_KPI_48,	numerator_MTD_KPI_48,	numerator_LMTD_KPI_48,	numerator_LAST_MTH_KPI_48,	numerator_YTD_KPI_48,	numerator_LYTD_KPI_48,	numerator_LAST_YR_KPI_48,
+            denominator_DAILY_KPI_48,	denominator_MTD_KPI_48,	denominator_LMTD_KPI_48,	denominator_LAST_MTH_KPI_48,	denominator_YTD_KPI_48,	denominator_LYTD_KPI_48,	denominator_LAST_YR_KPI_48,
+            numerator_DAILY_KPI_49,	numerator_MTD_KPI_49,	numerator_LMTD_KPI_49,	numerator_LAST_MTH_KPI_49,	numerator_YTD_KPI_49,	numerator_LYTD_KPI_49,	numerator_LAST_YR_KPI_49,
+            denominator_DAILY_KPI_49,	denominator_MTD_KPI_49,	denominator_LMTD_KPI_49,	denominator_LAST_MTH_KPI_49,	denominator_YTD_KPI_49,	denominator_LYTD_KPI_49,	denominator_LAST_YR_KPI_49,
+            numerator_DAILY_KPI_50,	numerator_MTD_KPI_50,	numerator_LMTD_KPI_50,	numerator_LAST_MTH_KPI_50,	numerator_YTD_KPI_50,	numerator_LYTD_KPI_50,	numerator_LAST_YR_KPI_50,
+            denominator_DAILY_KPI_50,	denominator_MTD_KPI_50,	denominator_LMTD_KPI_50,	denominator_LAST_MTH_KPI_50,	denominator_YTD_KPI_50,	denominator_LYTD_KPI_50,	denominator_LAST_YR_KPI_50,
+            numerator_DAILY_KPI_51,	numerator_MTD_KPI_51,	numerator_LMTD_KPI_51,	numerator_LAST_MTH_KPI_51,	numerator_YTD_KPI_51,	numerator_LYTD_KPI_51,	numerator_LAST_YR_KPI_51,
+            denominator_DAILY_KPI_51,	denominator_MTD_KPI_51,	denominator_LMTD_KPI_51,	denominator_LAST_MTH_KPI_51,	denominator_YTD_KPI_51,	denominator_LYTD_KPI_51,	denominator_LAST_YR_KPI_51,
+            numerator_DAILY_KPI_52,	numerator_MTD_KPI_52,	numerator_LMTD_KPI_52,	numerator_LAST_MTH_KPI_52,	numerator_YTD_KPI_52,	numerator_LYTD_KPI_52,	numerator_LAST_YR_KPI_52,
+            denominator_DAILY_KPI_52,	denominator_MTD_KPI_52,	denominator_LMTD_KPI_52,	denominator_LAST_MTH_KPI_52,	denominator_YTD_KPI_52,	denominator_LYTD_KPI_52,	denominator_LAST_YR_KPI_52,
+            numerator_DAILY_KPI_53,	numerator_MTD_KPI_53,	numerator_LMTD_KPI_53,	numerator_LAST_MTH_KPI_53,	numerator_YTD_KPI_53,	numerator_LYTD_KPI_53,	numerator_LAST_YR_KPI_53,
+            denominator_DAILY_KPI_53,	denominator_MTD_KPI_53,	denominator_LMTD_KPI_53,	denominator_LAST_MTH_KPI_53,	denominator_YTD_KPI_53,	denominator_LYTD_KPI_53,	denominator_LAST_YR_KPI_53,
+            numerator_DAILY_KPI_54,	numerator_MTD_KPI_54,	numerator_LMTD_KPI_54,	numerator_LAST_MTH_KPI_54,	numerator_YTD_KPI_54,	numerator_LYTD_KPI_54,	numerator_LAST_YR_KPI_54,
+            denominator_DAILY_KPI_54,	denominator_MTD_KPI_54,	denominator_LMTD_KPI_54,	denominator_LAST_MTH_KPI_54,	denominator_YTD_KPI_54,	denominator_LYTD_KPI_54,	denominator_LAST_YR_KPI_54,
+            numerator_DAILY_KPI_55,	numerator_MTD_KPI_55,	numerator_LMTD_KPI_55,	numerator_LAST_MTH_KPI_55,	numerator_YTD_KPI_55,	numerator_LYTD_KPI_55,	numerator_LAST_YR_KPI_55,
+            denominator_DAILY_KPI_55,	denominator_MTD_KPI_55,	denominator_LMTD_KPI_55,	denominator_LAST_MTH_KPI_55,	denominator_YTD_KPI_55,	denominator_LYTD_KPI_55,	denominator_LAST_YR_KPI_55,
+            numerator_DAILY_KPI_56,	numerator_MTD_KPI_56,	numerator_LMTD_KPI_56,	numerator_LAST_MTH_KPI_56,	numerator_YTD_KPI_56,	numerator_LYTD_KPI_56,	numerator_LAST_YR_KPI_56,
+            denominator_DAILY_KPI_56,	denominator_MTD_KPI_56,	denominator_LMTD_KPI_56,	denominator_LAST_MTH_KPI_56,	denominator_YTD_KPI_56,	denominator_LYTD_KPI_56,	denominator_LAST_YR_KPI_56,
+            numerator_DAILY_KPI_57,	numerator_MTD_KPI_57,	numerator_LMTD_KPI_57,	numerator_LAST_MTH_KPI_57,	numerator_YTD_KPI_57,	numerator_LYTD_KPI_57,	numerator_LAST_YR_KPI_57,
+            denominator_DAILY_KPI_57,	denominator_MTD_KPI_57,	denominator_LMTD_KPI_57,	denominator_LAST_MTH_KPI_57,	denominator_YTD_KPI_57,	denominator_LYTD_KPI_57,	denominator_LAST_YR_KPI_57,
+            numerator_DAILY_KPI_58,	numerator_MTD_KPI_58,	numerator_LMTD_KPI_58,	numerator_LAST_MTH_KPI_58,	numerator_YTD_KPI_58,	numerator_LYTD_KPI_58,	numerator_LAST_YR_KPI_58,
+            denominator_DAILY_KPI_58,	denominator_MTD_KPI_58,	denominator_LMTD_KPI_58,	denominator_LAST_MTH_KPI_58,	denominator_YTD_KPI_58,	denominator_LYTD_KPI_58,	denominator_LAST_YR_KPI_58,
+            numerator_DAILY_KPI_59,	numerator_MTD_KPI_59,	numerator_LMTD_KPI_59,	numerator_LAST_MTH_KPI_59,	numerator_YTD_KPI_59,	numerator_LYTD_KPI_59,	numerator_LAST_YR_KPI_59,
+            denominator_DAILY_KPI_59,	denominator_MTD_KPI_59,	denominator_LMTD_KPI_59,	denominator_LAST_MTH_KPI_59,	denominator_YTD_KPI_59,	denominator_LYTD_KPI_59,	denominator_LAST_YR_KPI_59,
+            numerator_DAILY_KPI_60,	numerator_MTD_KPI_60,	numerator_LMTD_KPI_60,	numerator_LAST_MTH_KPI_60,	numerator_YTD_KPI_60,	numerator_LYTD_KPI_60,	numerator_LAST_YR_KPI_60,
+            denominator_DAILY_KPI_60,	denominator_MTD_KPI_60,	denominator_LMTD_KPI_60,	denominator_LAST_MTH_KPI_60,	denominator_YTD_KPI_60,	denominator_LYTD_KPI_60,	denominator_LAST_YR_KPI_60,
+            numerator_DAILY_KPI_61,	numerator_MTD_KPI_61,	numerator_LMTD_KPI_61,	numerator_LAST_MTH_KPI_61,	numerator_YTD_KPI_61,	numerator_LYTD_KPI_61,	numerator_LAST_YR_KPI_61,
+            denominator_DAILY_KPI_61,	denominator_MTD_KPI_61,	denominator_LMTD_KPI_61,	denominator_LAST_MTH_KPI_61,	denominator_YTD_KPI_61,	denominator_LYTD_KPI_61,	denominator_LAST_YR_KPI_61,
+            numerator_DAILY_KPI_62,	numerator_MTD_KPI_62,	numerator_LMTD_KPI_62,	numerator_LAST_MTH_KPI_62,	numerator_YTD_KPI_62,	numerator_LYTD_KPI_62,	numerator_LAST_YR_KPI_62,
+            denominator_DAILY_KPI_62,	denominator_MTD_KPI_62,	denominator_LMTD_KPI_62,	denominator_LAST_MTH_KPI_62,	denominator_YTD_KPI_62,	denominator_LYTD_KPI_62,	denominator_LAST_YR_KPI_62,
+            numerator_DAILY_KPI_63,	numerator_MTD_KPI_63,	numerator_LMTD_KPI_63,	numerator_LAST_MTH_KPI_63,	numerator_YTD_KPI_63,	numerator_LYTD_KPI_63,	numerator_LAST_YR_KPI_63,
+            denominator_DAILY_KPI_63,	denominator_MTD_KPI_63,	denominator_LMTD_KPI_63,	denominator_LAST_MTH_KPI_63,	denominator_YTD_KPI_63,	denominator_LYTD_KPI_63,	denominator_LAST_YR_KPI_63,
+            numerator_DAILY_KPI_64,	numerator_MTD_KPI_64,	numerator_LMTD_KPI_64,	numerator_LAST_MTH_KPI_64,	numerator_YTD_KPI_64,	numerator_LYTD_KPI_64,	numerator_LAST_YR_KPI_64,
+            denominator_DAILY_KPI_64,	denominator_MTD_KPI_64,	denominator_LMTD_KPI_64,	denominator_LAST_MTH_KPI_64,	denominator_YTD_KPI_64,	denominator_LYTD_KPI_64,	denominator_LAST_YR_KPI_64,
+            numerator_DAILY_KPI_65,	numerator_MTD_KPI_65,	numerator_LMTD_KPI_65,	numerator_LAST_MTH_KPI_65,	numerator_YTD_KPI_65,	numerator_LYTD_KPI_65,	numerator_LAST_YR_KPI_65,
+            denominator_DAILY_KPI_65,	denominator_MTD_KPI_65,	denominator_LMTD_KPI_65,	denominator_LAST_MTH_KPI_65,	denominator_YTD_KPI_65,	denominator_LYTD_KPI_65,	denominator_LAST_YR_KPI_65,
+            numerator_DAILY_KPI_66,	numerator_MTD_KPI_66,	numerator_LMTD_KPI_66,	numerator_LAST_MTH_KPI_66,	numerator_YTD_KPI_66,	numerator_LYTD_KPI_66,	numerator_LAST_YR_KPI_66,
+            denominator_DAILY_KPI_66,	denominator_MTD_KPI_66,	denominator_LMTD_KPI_66,	denominator_LAST_MTH_KPI_66,	denominator_YTD_KPI_66,	denominator_LYTD_KPI_66,	denominator_LAST_YR_KPI_66,
+            numerator_DAILY_KPI_67,	numerator_MTD_KPI_67,	numerator_LMTD_KPI_67,	numerator_LAST_MTH_KPI_67,	numerator_YTD_KPI_67,	numerator_LYTD_KPI_67,	numerator_LAST_YR_KPI_67,
+            denominator_DAILY_KPI_67,	denominator_MTD_KPI_67,	denominator_LMTD_KPI_67,	denominator_LAST_MTH_KPI_67,	denominator_YTD_KPI_67,	denominator_LYTD_KPI_67,	denominator_LAST_YR_KPI_67,
+            numerator_DAILY_KPI_68,	numerator_MTD_KPI_68,	numerator_LMTD_KPI_68,	numerator_LAST_MTH_KPI_68,	numerator_YTD_KPI_68,	numerator_LYTD_KPI_68,	numerator_LAST_YR_KPI_68,
+            denominator_DAILY_KPI_68,	denominator_MTD_KPI_68,	denominator_LMTD_KPI_68,	denominator_LAST_MTH_KPI_68,	denominator_YTD_KPI_68,	denominator_LYTD_KPI_68,	denominator_LAST_YR_KPI_68,
+            numerator_DAILY_KPI_69,	numerator_MTD_KPI_69,	numerator_LMTD_KPI_69,	numerator_LAST_MTH_KPI_69,	numerator_YTD_KPI_69,	numerator_LYTD_KPI_69,	numerator_LAST_YR_KPI_69,
+            denominator_DAILY_KPI_69,	denominator_MTD_KPI_69,	denominator_LMTD_KPI_69,	denominator_LAST_MTH_KPI_69,	denominator_YTD_KPI_69,	denominator_LYTD_KPI_69,	denominator_LAST_YR_KPI_69,
+            numerator_DAILY_KPI_70,	numerator_MTD_KPI_70,	numerator_LMTD_KPI_70,	numerator_LAST_MTH_KPI_70,	numerator_YTD_KPI_70,	numerator_LYTD_KPI_70,	numerator_LAST_YR_KPI_70,
+            denominator_DAILY_KPI_70,	denominator_MTD_KPI_70,	denominator_LMTD_KPI_70,	denominator_LAST_MTH_KPI_70,	denominator_YTD_KPI_70,	denominator_LYTD_KPI_70,	denominator_LAST_YR_KPI_70,
+            numerator_DAILY_KPI_71,	numerator_MTD_KPI_71,	numerator_LMTD_KPI_71,	numerator_LAST_MTH_KPI_71,	numerator_YTD_KPI_71,	numerator_LYTD_KPI_71,	numerator_LAST_YR_KPI_71,
+            denominator_DAILY_KPI_71,	denominator_MTD_KPI_71,	denominator_LMTD_KPI_71,	denominator_LAST_MTH_KPI_71,	denominator_YTD_KPI_71,	denominator_LYTD_KPI_71,	denominator_LAST_YR_KPI_71,
+            numerator_DAILY_KPI_72,	numerator_MTD_KPI_72,	numerator_LMTD_KPI_72,	numerator_LAST_MTH_KPI_72,	numerator_YTD_KPI_72,	numerator_LYTD_KPI_72,	numerator_LAST_YR_KPI_72,
+            denominator_DAILY_KPI_72,	denominator_MTD_KPI_72,	denominator_LMTD_KPI_72,	denominator_LAST_MTH_KPI_72,	denominator_YTD_KPI_72,	denominator_LYTD_KPI_72,	denominator_LAST_YR_KPI_72,
+            numerator_DAILY_KPI_73,	numerator_MTD_KPI_73,	numerator_LMTD_KPI_73,	numerator_LAST_MTH_KPI_73,	numerator_YTD_KPI_73,	numerator_LYTD_KPI_73,	numerator_LAST_YR_KPI_73,
+            denominator_DAILY_KPI_73,	denominator_MTD_KPI_73,	denominator_LMTD_KPI_73,	denominator_LAST_MTH_KPI_73,	denominator_YTD_KPI_73,	denominator_LYTD_KPI_73,	denominator_LAST_YR_KPI_73,
+            numerator_DAILY_KPI_74,	numerator_MTD_KPI_74,	numerator_LMTD_KPI_74,	numerator_LAST_MTH_KPI_74,	numerator_YTD_KPI_74,	numerator_LYTD_KPI_74,	numerator_LAST_YR_KPI_74,
+            denominator_DAILY_KPI_74,	denominator_MTD_KPI_74,	denominator_LMTD_KPI_74,	denominator_LAST_MTH_KPI_74,	denominator_YTD_KPI_74,	denominator_LYTD_KPI_74,	denominator_LAST_YR_KPI_74,
+            numerator_DAILY_KPI_75,	numerator_MTD_KPI_75,	numerator_LMTD_KPI_75,	numerator_LAST_MTH_KPI_75,	numerator_YTD_KPI_75,	numerator_LYTD_KPI_75,	numerator_LAST_YR_KPI_75,
+            denominator_DAILY_KPI_75,	denominator_MTD_KPI_75,	denominator_LMTD_KPI_75,	denominator_LAST_MTH_KPI_75,	denominator_YTD_KPI_75,	denominator_LYTD_KPI_75,	denominator_LAST_YR_KPI_75,
+            numerator_DAILY_KPI_76,	numerator_MTD_KPI_76,	numerator_LMTD_KPI_76,	numerator_LAST_MTH_KPI_76,	numerator_YTD_KPI_76,	numerator_LYTD_KPI_76,	numerator_LAST_YR_KPI_76,
+            denominator_DAILY_KPI_76,	denominator_MTD_KPI_76,	denominator_LMTD_KPI_76,	denominator_LAST_MTH_KPI_76,	denominator_YTD_KPI_76,	denominator_LYTD_KPI_76,	denominator_LAST_YR_KPI_76,
+            numerator_DAILY_KPI_77,	numerator_MTD_KPI_77,	numerator_LMTD_KPI_77,	numerator_LAST_MTH_KPI_77,	numerator_YTD_KPI_77,	numerator_LYTD_KPI_77,	numerator_LAST_YR_KPI_77,
+            denominator_DAILY_KPI_77,	denominator_MTD_KPI_77,	denominator_LMTD_KPI_77,	denominator_LAST_MTH_KPI_77,	denominator_YTD_KPI_77,	denominator_LYTD_KPI_77,	denominator_LAST_YR_KPI_77,
+            numerator_DAILY_KPI_78,	numerator_MTD_KPI_78,	numerator_LMTD_KPI_78,	numerator_LAST_MTH_KPI_78,	numerator_YTD_KPI_78,	numerator_LYTD_KPI_78,	numerator_LAST_YR_KPI_78,
+            denominator_DAILY_KPI_78,	denominator_MTD_KPI_78,	denominator_LMTD_KPI_78,	denominator_LAST_MTH_KPI_78,	denominator_YTD_KPI_78,	denominator_LYTD_KPI_78,	denominator_LAST_YR_KPI_78
+        )
+    )
+    WHERE 1 = 1 
+    AND insertDate = '2024-09-07'
+) , 
+
+pivoted_again AS
+    (
+        SELECT INSERTDATE, COMPANY, NETWORKS, PRODUCTS, kpiseq, kpicode, verticals, Horizontals, allvalues
+        FROM UNPIVOTED, LATERAL ( SELECT * FROM sampledb.testuser.KPI_MASTER where Heades = columnheads)
+    )
+-- SELECT
+-- INSERTDATE, COMPANY, NETWORKS, PRODUCTS, kpiseq, KPICODE, VERTICALS,
+-- NUMERATOR_DAILY,  DENOMINATOR_DAILY, 
+-- NUMERATOR_MTD,  DENOMINATOR_MTD, 
+-- NUMERATOR_LMTD,  DENOMINATOR_LMTD, 
+-- NUMERATOR_LAST_MTH,  DENOMINATOR_LAST_MTH, 
+-- NUMERATOR_YTD,  DENOMINATOR_YTD, 
+-- NUMERATOR_LYTD,  DENOMINATOR_LYTD, 
+-- NUMERATOR_LAST_YR,  DENOMINATOR_LAST_YR 
+-- FROM pivoted_again
+-- PIVOT (SUM(allvalues) FOR Horizontals IN (
+-- 'NUMERATOR_DAILY',  'DENOMINATOR_DAILY', 
+-- 'NUMERATOR_MTD',  'DENOMINATOR_MTD', 
+-- 'NUMERATOR_LMTD',  'DENOMINATOR_LMTD', 
+-- 'NUMERATOR_LAST_MTH',  'DENOMINATOR_LAST_MTH', 
+-- 'NUMERATOR_YTD',  'DENOMINATOR_YTD', 
+-- 'NUMERATOR_LYTD',  'DENOMINATOR_LYTD', 
+-- 'NUMERATOR_LAST_YR',  'DENOMINATOR_LAST_YR')) AS Horizontals
+-- (INSERTDATE, COMPANY, NETWORKS, PRODUCTS, kpiseq, KPICODE, VERTICALS, NUMERATOR_DAILY,  DENOMINATOR_DAILY, 
+-- NUMERATOR_MTD,  DENOMINATOR_MTD, 
+-- NUMERATOR_LMTD,  DENOMINATOR_LMTD, 
+-- NUMERATOR_LAST_MTH,  DENOMINATOR_LAST_MTH, 
+-- NUMERATOR_YTD,  DENOMINATOR_YTD, 
+-- NUMERATOR_LYTD,  DENOMINATOR_LYTD, 
+-- NUMERATOR_LAST_YR,  DENOMINATOR_LAST_YR)
+-- WHERE 1 = 1
+-- AND insertDate = '2024-09-06'
+-- AND company = 'Company - 1'
+-- AND NETWORKS = 'NETWORK - 1'
+-- AND PRODUCTS = 'PRODUCT - 1'
+-- ORDER BY 
+-- INSERTDATE, COMPANY, NETWORKS, PRODUCTS, kpiseq
+--  ;
+SELECT
+*
+FROM pivoted_again
+PIVOT (SUM(allvalues) FOR Horizontals IN (
+SELECT DISTINCT Horizontals FROM sampledb.testuser.KPI_MASTER)) AS Horizontals
+(INSERTDATE, COMPANY, NETWORKS, PRODUCTS, kpiseq, KPICODE, VERTICALS, NUMERATOR_DAILY,  DENOMINATOR_DAILY, 
+NUMERATOR_MTD,  DENOMINATOR_MTD, 
+NUMERATOR_LMTD,  DENOMINATOR_LMTD, 
+NUMERATOR_LAST_MTH,  DENOMINATOR_LAST_MTH, 
+NUMERATOR_YTD,  DENOMINATOR_YTD, 
+NUMERATOR_LYTD,  DENOMINATOR_LYTD, 
+NUMERATOR_LAST_YR,  DENOMINATOR_LAST_YR)
+WHERE 1 = 1
+AND company = 'Company - 1'
+AND NETWORKS = 'NETWORK - 1'
+AND PRODUCTS = 'PRODUCT - 1'
+ORDER BY 
+INSERTDATE, COMPANY, NETWORKS, PRODUCTS, kpiseq
+;
