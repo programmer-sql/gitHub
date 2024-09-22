@@ -20,8 +20,10 @@ SELECT pymtDate , paymentCompany, paymentHead, paymentSubHead, UNIFORM(10, 155, 
 FROM
 (
     SELECT dateadd(day, -1 * (seq4() + 1), current_date()) pymtDate
-    FROM TABLE(GENERATOR(ROWCOUNT => 56))
+    FROM TABLE(GENERATOR(ROWCOUNT => 55))
 )
 Cross JOIN values ('Digtal Co'), ('Navigator LLC'), ('Somaya INC.') PC(paymentCompany)
 Cross JOIN values ('Digtal'), ('Cash'), ('Cheque') PH(paymentHead)
 Cross JOIN values ('Full'), ('Partial') PS(paymentSubHead);
+
+TRUNCATE TABLE payments;
