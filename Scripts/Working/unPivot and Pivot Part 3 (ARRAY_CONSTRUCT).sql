@@ -15,7 +15,7 @@ Pvt.VALUE: SEC_5::INT AS SEC_5,
 Pvt.VALUE: SEC_6::INT AS SEC_6, 
 Pvt.VALUE: SEC_7::INT AS SEC_7, 
 Pvt.VALUE: SEC_8::INT AS SEC_8 
-from sampledb.testuser.attendanceCount hrd,
+from sampledb.testuser.attendanceCount hrd cross join
 TABLE(FLATTEN(INPUT => ARRAY_CONSTRUCT(
     OBJECT_CONSTRUCT_KEEP_NULL(
     'CLASS', 'Class 1',
