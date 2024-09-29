@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.env.windows": {
+        "SPARK_HOME": "C:\\spark", // path to your Spark installation
+        "HADOOP_HOME": "C:\\hadoop", // path to your Hadoop installation
+        "PYSPARK_PYTHON": "C:\\Users\\progr\\AppData\\Local\\Programs\\Python\\Python39\\python.exe", // path to Python (verify actual path)
+        "PYTHONPATH": "${SPARK_HOME}\\python;${SPARK_HOME}\\python\\lib\\py4j-0.10.9-src.zip"
+    }
+}
