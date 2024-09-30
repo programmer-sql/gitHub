@@ -1,5 +1,8 @@
 from pyspark.sql import SparkSession
 
+import os
+os.environ['PYSPARK_PYTHON'] = 'C:\\Users\\progr\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe'
+
 # Create a Spark Session
 spark = SparkSession.builder \
     .appName("PySparkTest") \
